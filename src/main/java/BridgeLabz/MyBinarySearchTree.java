@@ -8,10 +8,10 @@ public class MyBinarySearchTree<K extends Comparable<K>> {
     }
 
     public void add(MyBinaryNode<K> nodeToAdd){
-        this.addNodeToTree(this.rootNode,nodeToAdd);
+        this.add(this.rootNode,nodeToAdd);
     }
 
-    public void addNodeToTree(MyBinaryNode<K> currentRootNode, MyBinaryNode<K> nodeToAdd) {
+    private void add(MyBinaryNode<K> currentRootNode, MyBinaryNode<K> nodeToAdd) {
         if(this.rootNode==null){
             this.rootNode = nodeToAdd;
             return;
@@ -22,17 +22,16 @@ public class MyBinarySearchTree<K extends Comparable<K>> {
                 return;
             }else{
                 currentRootNode = currentRootNode.getLeftNode();
-                this.addNodeToTree(currentRootNode,nodeToAdd);
+                this.add(currentRootNode,nodeToAdd);
             }
         }else{
             if(currentRootNode.getRightNode() == null){
                 currentRootNode.setRightNode(nodeToAdd);
                 return;
             }else{
-                currentRootNode = currentRootNode.getLeftNode();
-                this.addNodeToTree(currentRootNode,nodeToAdd);
+                currentRootNode = currentRootNode.getRightNode();
+                this.add(currentRootNode,nodeToAdd);
             }
-
         }
     }
 
@@ -40,7 +39,16 @@ public class MyBinarySearchTree<K extends Comparable<K>> {
         return true;
     }
 
-    public int getSize() {
-        return 0;
+    public int getSize(){
+        return getSize(this.rootNode);
+    }
+
+    public int getSize(MyBinaryNode<K> currentNode) {
+        if(currentNode == null){
+            return 0;
+        }
+        else{
+            return getSize(currentNode.getLeftNode()) + 1 + getSize(currentNode.getRightNode());
+        }
     }
 }

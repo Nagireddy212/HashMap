@@ -2,7 +2,7 @@ package BridgeLabz;
 
 import java.util.ArrayList;
 
-public class MyHashMap<K, V> {
+public class MyHashMap<K extends Comparable<K>, V> {
 
     private final int numBuckets;
     ArrayList<MyMapNodeList<K,V>> myArraylistOfLinkedList;
@@ -64,5 +64,4 @@ public class MyHashMap<K, V> {
         }
         return returnString.toString();
     }
-
 }
