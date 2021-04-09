@@ -1,6 +1,6 @@
 package BridgeLabz;
 
-public class MyMapNode<K,V> implements INode<K> {
+public class MyMapNode<K extends Comparable<K>,V> implements INode<K> {
     K key;
     V value;
     MyMapNode<K,V> next;
@@ -43,13 +43,12 @@ public class MyMapNode<K,V> implements INode<K> {
     }
 
     @Override
-    public int compareTo(INode<K> kiNode) {
-        //Function does nothing , not required for current UCs
-        return 0;
+    public String toString() {
+        return "[" + this.key.toString() + "-" + this.value.toString() + "]";
     }
 
     @Override
-    public String toString() {
-        return "[" + this.key.toString() + "-" + this.value.toString() + "]";
+    public int compareTo(INode<K> nodeToCompare) {
+        return this.key.compareTo(nodeToCompare.getKey());
     }
 }

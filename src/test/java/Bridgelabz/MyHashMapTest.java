@@ -84,9 +84,7 @@ public class MyHashMapTest{
         }
 
         MyMapNode<String ,Integer> avoidableOccurrenceBeforeDelete = keyValueHashMap.get("avoidable");
-        System.out.println(keyValueHashMap);
         keyValueHashMap.remove("avoidable");
-        System.out.println(keyValueHashMap);
         boolean testVariable = avoidableOccurrenceBeforeDelete.getValue() == 1 &&
                 !keyValueHashMap.remove("avoidable");
         Assertions.assertTrue(testVariable);
@@ -117,5 +115,16 @@ public class MyHashMapTest{
         boolean testVariable = avoidableOccurrenceBeforeDelete.getValue() == 1 &&
                 !keyValueHashMap.isPresent("avoidable");
         Assertions.assertTrue(testVariable);
+    }
+
+    @Test
+    public void given2KeyValuePairs_CompareTheKeys_CheckIfYouGetCorrectCompareToFunctionOutput(){
+        MyMapNode<String ,Integer> nodeOne = new MyMapNode<>("1",2,null);
+        MyMapNode<String ,Integer> nodeTwo = new MyMapNode<>("2",2,null);
+        MyMapNode<String ,Integer> nodeThree = new MyMapNode<>("3",2,null);
+
+        Assertions.assertEquals(-1,nodeOne.compareTo(nodeTwo));
+        Assertions.assertEquals(0,nodeTwo.compareTo(nodeTwo));
+        Assertions.assertEquals(1,nodeTwo.compareTo(nodeOne));
     }
 }
