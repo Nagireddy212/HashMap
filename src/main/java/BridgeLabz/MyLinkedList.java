@@ -105,13 +105,12 @@ public class MyLinkedList<K> {
     public void deleteNodeByKey(K keyToDelete) {
         INode<K> previousNode = null;
         INode<K> currentNode = this.head;
-
-        if(currentNode.getKey()==keyToDelete){
+        if(currentNode.getKey().equals(keyToDelete)){
             currentNode = currentNode.getNext();
             this.head=currentNode;
             return;
         }
-        while(currentNode.getKey()!=keyToDelete){
+        while(currentNode.getKey()!= keyToDelete){
             previousNode = currentNode;
             currentNode = currentNode.getNext();
         }
@@ -154,6 +153,20 @@ public class MyLinkedList<K> {
         return this.getHead() == null;
     }
 
+    public boolean isPresent(K searchKey) {
+        INode<K> currentNode = this.head;
+        if(currentNode.getKey().equals(searchKey)){
+            return true;
+        }
+        while(currentNode.getKey() != searchKey
+                && currentNode != this.tail){
+            currentNode = currentNode.getNext();
+        }
+        if (currentNode.getKey() == searchKey)
+            return true;
+        return false;
+    }
+
     @Override
     public String toString() {
         if(this.head == null){
@@ -163,11 +176,12 @@ public class MyLinkedList<K> {
         StringBuilder returnString = new StringBuilder();
         returnString.append("Head->  ");
         while(currentNode.getNext() != null){
-            returnString.append(currentNode+"->");
+            returnString.append(currentNode).append("->");
             currentNode = currentNode.getNext();
         }
         returnString.append(currentNode);
         returnString.append("  <-Tail");
         return returnString.toString();
     }
+
 }

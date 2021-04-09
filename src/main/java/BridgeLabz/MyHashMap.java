@@ -20,10 +20,12 @@ public class MyHashMap<K, V> {
     }
 
     public MyMapNode<K,V> get(K key) {
-        if(this.myArraylistOfLinkedList.get(getBucketIndex(key)) == null){
+        try{
+            return (MyMapNode<K, V>) this.myArraylistOfLinkedList.get(getBucketIndex(key)).get(key);
+        }catch (NullPointerException e){
             return null;
         }
-        return (MyMapNode<K, V>) this.myArraylistOfLinkedList.get(getBucketIndex(key)).get(key);
+
     }
 
     public void add(K key , V value) {
@@ -32,6 +34,22 @@ public class MyHashMap<K, V> {
             this.myArraylistOfLinkedList.set(index,new MyMapNodeList<>());
         }
         this.myArraylistOfLinkedList.get(getBucketIndex(key)).add(key,value);
+    }
+
+    public boolean remove(K key) {
+        int index = getBucketIndex(key);
+        try{
+            this.myArraylistOfLinkedList.get(getBucketIndex(key)).myLinkedList.deleteNodeByKey(key);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+
+    public boolean isPresent(K searchKey) {
+        int index = getBucketIndex(searchKey);
+        return this.myArraylistOfLinkedList.get(index).isPresent(searchKey);
     }
 
     @Override
@@ -46,4 +64,5 @@ public class MyHashMap<K, V> {
         }
         return returnString.toString();
     }
+
 }
