@@ -35,7 +35,6 @@ public class MyMapNode<K,V> implements INode<K> {
 
     @Override
     public int compareTo(INode<K> kiNode) {
-        //Function does nothing , not required for current UCs
         return 0;
     }
 
